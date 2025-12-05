@@ -1,0 +1,127 @@
+#quick way to get the muon sim to run
+/run/initialize
+
+#/gps/verbose 2
+/gps/particle fcp
+/gps/pos/type Plane
+/gps/pos/shape Rectangle
+#/gps/pos/centre 290 0 -160 cm
+/gps/pos/centre 290 0 -50 cm
+#/gps/pos/centre 340 0 -160 cm
+/gps/pos/halfx 340 cm
+/gps/pos/halfy 575 cm #500cm
+#/gps/pos/halfx 10 cm
+#/gps/pos/halfy 20 cm #500cm
+/gps/pos/rot1 0 1 0
+/gps/pos/rot2 0 0 1
+
+# distributions below obtained from integration of interpolated 2D tabulated flux. 
+# The flux is taken at the surface of the earth. 
+# The rates are for a FCP of mass 0.1 GeV
+
+#-----------------------------------------
+# Energy distribution
+/gps/ene/type User
+/gps/hist/type energy
+/gps/hist/point 100.000016 0.00000000
+/gps/hist/point 136.644855 0.00000000
+/gps/hist/point 186.718121 0.00000000
+/gps/hist/point 255.140692 0.00000000
+/gps/hist/point 348.636538 0.00000000
+/gps/hist/point 476.393819 0.00000000
+/gps/hist/point 650.967598 0.978174508
+/gps/hist/point 889.513433 1.00000000
+/gps/hist/point 1215.47425 0.624673724
+/gps/hist/point 1660.88235 0.367136091
+/gps/hist/point 2269.51051 0.197082192
+/gps/hist/point 3101.16935 0.0948793665
+/gps/hist/point 4237.58650 0.0415923670
+/gps/hist/point 5790.44247 0.0175092518
+/gps/hist/point 7912.34112 0.00746772811
+/gps/hist/point 10811.8057 0.00322000566
+/gps/hist/point 14773.7722 0.00135766459
+/gps/hist/point 20187.5954 0.000563469075
+/gps/hist/point 27585.3024 0.000232206032
+/gps/hist/point 37693.8972 0.0000957530428
+/gps/hist/point 51506.7596 0.0000398526031
+/gps/hist/point 70381.3171 0.0000168858642
+/gps/hist/point 96172.4854 0.00000729923613
+/gps/hist/point 131414.719 0.00000318168895
+/gps/hist/point 179571.396 0.00000139394626
+/gps/hist/point 245375.015 0.000000613326847
+/gps/hist/point 335292.084 0.000000270860028
+/gps/hist/point 458159.515 0.000000118885147
+/gps/hist/point 626051.208 0.0000520665395
+/gps/hist/point 855466.614 0.0000227048282
+/gps/hist/point 1039797.36 0.00000992925120
+/gps/hist/point 1420829.98 0.00000432971348
+/gps/hist/point 1941489.45 0.00000188126403
+/gps/hist/point 2652946.29 0.000000817436507
+/gps/hist/point 3625115.62 0.000000355609514
+/gps/hist/point 4953530.08 0.000000154106436
+/gps/hist/point 6768746.09 0.0000000662854494
+/gps/hist/point 9229146.09 0.0000000281732502
+/gps/hist/point 12638472.7 0.0000000119567420
+/gps/hist/point 17269828.1 0.00000000506892662
+/gps/hist/point 23598312.5 0.00000000213056439
+/gps/hist/point 32245887.5 0.000000000891751300
+/gps/hist/point 44062362.5 0.000000000367135331
+/gps/hist/point 60208831.5 0.000000000149745789
+/gps/hist/point 82272300.0 0.0000000000597761606
+/gps/hist/point 112420775. 0.0000000000202959848
+/gps/hist/point 153617250. 0.00000000000670417603
+/gps/hist/point 209910125. 0.00000000000222157262
+/gps/hist/point 286831175. 0.000000000000751528328
+/gps/hist/point 391940150. 0.000000000000262114563
+/gps/hist/point 535566200. 0.0000000000000942130865
+/gps/hist/point 731823100. 0.0000000000000339667857
+/gps/hist/point 999998900. 0.0000000000000124135608
+
+
+# ------------------------------------------------------------
+# Angular distrinution
+/gps/ang/type user
+/gps/hist/type theta
+/gps/hist/point 1.57079637e+00 3.59307319e-01
+/gps/hist/point 1.54515254e+00 4.24816579e-01
+/gps/hist/point 1.51949179e+00 4.92831111e-01
+/gps/hist/point 1.49379718e+00 5.61414301e-01
+/gps/hist/point 1.46805155e+00 6.28633499e-01
+/gps/hist/point 1.44223738e+00 6.92571044e-01
+/gps/hist/point 1.41633677e+00 7.51336217e-01
+/gps/hist/point 1.39033115e+00 8.03077102e-01
+/gps/hist/point 1.36420166e+00 8.46009910e-01
+/gps/hist/point 1.33792818e+00 8.79778147e-01
+/gps/hist/point 1.31148982e+00 9.05845940e-01
+/gps/hist/point 1.28486478e+00 9.25716877e-01
+/gps/hist/point 1.25802958e+00 9.40873027e-01
+/gps/hist/point 1.23095942e+00 9.52762067e-01
+/gps/hist/point 1.20362759e+00 9.62788522e-01
+/gps/hist/point 1.17600513e+00 9.72299397e-01
+/gps/hist/point 1.14806116e+00 9.82226074e-01
+/gps/hist/point 1.11976111e+00 9.90236402e-01
+/gps/hist/point 1.09106767e+00 9.95773911e-01
+/gps/hist/point 1.06193924e+00 9.98985469e-01
+/gps/hist/point 1.03232932e+00 1.00000000e+00
+/gps/hist/point 1.00218594e+00 9.98923182e-01
+/gps/hist/point 9.71450329e-01 9.95834887e-01
+/gps/hist/point 9.40055013e-01 9.90780950e-01
+/gps/hist/point 9.07922506e-01 9.83632743e-01
+/gps/hist/point 8.74962509e-01 9.73770916e-01
+/gps/hist/point 8.41068625e-01 9.61015880e-01
+/gps/hist/point 8.06114197e-01 9.45200801e-01
+/gps/hist/point 7.69945323e-01 9.26099539e-01
+/gps/hist/point 7.32373118e-01 9.03410256e-01
+/gps/hist/point 6.93159878e-01 8.76729250e-01
+/gps/hist/point 6.52000070e-01 8.45515311e-01
+/gps/hist/point 6.08488739e-01 8.09006214e-01
+/gps/hist/point 5.62069774e-01 7.66075194e-01
+/gps/hist/point 5.11941850e-01 7.15177536e-01
+/gps/hist/point 4.56873983e-01 6.54044807e-01
+/gps/hist/point 3.94791096e-01 5.79001606e-01
+/gps/hist/point 3.21640939e-01 4.83111054e-01
+/gps/hist/point 2.26942092e-01 3.48976582e-01
+/gps/hist/point 0.00000000e+00 0.00000000e+00
+
+
+/run/beamOn 500000
