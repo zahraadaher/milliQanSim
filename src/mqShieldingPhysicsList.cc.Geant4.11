@@ -92,11 +92,15 @@
 #include "G4OpticalPhysics.hh"
 //#include "G4OpticalProcessIndex.hh"
 
+#include "G4FCP.hh"
+
+
 
 //template<class T> TShielding<T>::TShielding(G4int ver):  T()
 //template<class T> TShielding<T>::TShielding( G4int verbose, G4String LEN_model ):  T()
 mqShieldingList::mqShieldingList( G4int verbose, G4String LEN_model, const boost::property_tree::ptree pt)
-{
+{  
+  DefineFCP(); // zdaher 
   // default cut value  (1.0mm)
   // defaultCutValue = 1.0*CLHEP::mm;
   //G4DataQuestionaire it(photon, neutron, radioactive);
@@ -190,22 +194,22 @@ mqShieldingList::mqShieldingList( G4int verbose, G4String LEN_model, const boost
 
   // G.H.
   //optical physics added manually to shielding list
-///*
+/*
   G4OpticalPhysics* opticalPhysics = new G4OpticalPhysics();
 
 
-   opticalPhysics->SetScintillationYieldFactor(1.0);
+   //opticalPhysics->SetScintillationYieldFactor(1.0);
    //opticalPhysics->SetScintillationExcitationRatio(0.0);
 
    //opticalPhysics->SetMaxNumPhotonsPerStep(300);
    //opticalPhysics->SetMaxBetaChangePerStep(10.0);
 
-   opticalPhysics->SetTrackSecondariesFirst(kCerenkov,false);
-   opticalPhysics->SetTrackSecondariesFirst(kScintillation,false);
+   //opticalPhysics->SetTrackSecondariesFirst(kCerenkov,false);
+   //opticalPhysics->SetTrackSecondariesFirst(kScintillation,false);
 
 
    this->RegisterPhysics( opticalPhysics );
-//*/
+*/
 
 //calculator for various physics values
 G4EmCalculator emCalc;
