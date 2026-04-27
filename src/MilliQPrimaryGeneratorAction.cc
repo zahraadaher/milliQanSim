@@ -181,9 +181,9 @@ void MilliQPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent) {
 
 //pencil beam muon trajectory
 ///*
-  G4double downOffset = -19*cm;
+  G4double downOffset = -4*cm;
   G4double sideOffset = 0*m;
-  G4double rotAngle = 43.1*degree;
+  G4double rotAngle = 35.03*degree;
   G4double xOffset = -232.23*cm-downOffset*cos(rotAngle); //6cm higher to account for offset of center of detector
   G4double yOffset = 0*cm+sideOffset;
   G4double zOffset = -273.81*cm+downOffset*sin(rotAngle);

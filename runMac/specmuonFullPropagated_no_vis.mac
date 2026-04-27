@@ -238,4 +238,4 @@
 #/gps/ene/mono 3 GeV
 
 #/run/fname /home/users/ryan/milliQanDemoSim/datacosmicmuons/tempdir0/
-/run/beamOn 10
+/run/beamOn 1000

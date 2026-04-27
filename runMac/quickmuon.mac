@@ -264,6 +264,6 @@
 /vis/viewer/set/background white
 
 /vis/viewer/flush
-/run/beamOn 1
+/run/beamOn 5
 
 

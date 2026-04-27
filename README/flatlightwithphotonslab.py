@@ -178,15 +178,15 @@ def populate_vectors_pmt(input_tree, pmt_nPE, pmt_copyNo, pmt_time, pmt_layer, p
 ##################################################################################################################
 # Main script
 # Load the custom dictionary
-if ROOT.gSystem.Load("/net/cms26/cms26r0/zheng/slabsim/withPhoton/milliQanSim/build/libMilliQanCore.so") < 0:
+if ROOT.gSystem.Load("/net/cms26/cms26r0/zahraadaher/milliQanSim/build/libMilliQanCore.so") < 0:
 #if ROOT.gSystem.Load("libMilliQanCore.so") < 0:
     raise Exception("Failed to load custom dictionary.")
 
 # Open the input ROOT file specified in the first argument
 #filename = "/net/cms26/cms26r0/zheng/barSimulation/barWithPhotonUpdate/BARcosmic" + sys.argv[1] + "/MilliQan.root"
-filename = sys.argv[1] + sys.argv[2] + "/MilliQan.root"
-outname = "output_" + sys.argv[2] + ".root"
-#filename = "MilliQan.root"
+#filename = sys.argv[1] + sys.argv[2] + "/MilliQan.root"
+outname = "output_" + sys.argv[1]
+filename = sis.argv[1]
 #outname = "MilliQan_flat.root"
 
 input_file = ROOT.TFile(filename, "READ")

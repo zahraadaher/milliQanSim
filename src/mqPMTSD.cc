@@ -39,7 +39,7 @@ mqPMTSD::mqPMTSD(G4String name)
 mqPMTSD::~mqPMTSD()
 
 {
-//	if(pmtHitCollection) delete pmtHitCollection;
+
 }
 
 //_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
@@ -69,40 +69,43 @@ G4bool mqPMTSD::ProcessHits_constStep(const G4Step* aStep,
   //need to know if this is an optical photon
   if(aStep->GetTrack()->GetDefinition() != G4OpticalPhoton::OpticalPhotonDefinition()) return false;
 
-//  const G4VTouchable* aStep->GetPostStepPoint()->GetTouchable() = aStep->GetPostStepPoint()->GetTouchable();
+  //this is the copy number within a layer
+  G4int pmtCopyNumber =
+    aStep->GetPostStepPoint()->GetTouchable()->GetCopyNumber();
 
-//  const G4VProcess* process = aStep->GetPostStepPoint()->GetProcessDefinedStep();
-
-  G4int volCopyNo = aStep->GetPostStepPoint()->GetTouchable()->GetCopyNumber();
-  G4int copyNo=0;
-  if(volCopyNo<6){
-
-  //get the detector to retrieve layer information
-//  mqDetectorConstruction* detector = (mqDetectorConstruction*)G4RunManager::GetRunManager()
-//                                            ->GetUserDetectorConstruction();
-  //get number of bars per layer
-//  G4int nBarPerLayer = detector->GetNBarPerLayer();
-
-  G4int nBarPerLayer = 9*6*4;
-
+  //extract layer number of hit
   char layerNumberChar = aStep->GetPostStepPoint()->GetTouchable()->GetVolume()->GetName().back();
+  //convert layer number to char (ASCII characters work this way)
   G4int layerNumber = layerNumberChar-48;
-  G4int subStackCopyNo = aStep->GetPostStepPoint()->GetTouchable()->GetCopyNumber(2);
-//  G4String subStackName = aStep->GetPostStepPoint()->GetTouchable()->GetVolume()->GetName();
-//  G4cout << "substackCopyNoName : " << subStackName << G4endl;
-  copyNo = nBarPerLayer*layerNumber + volCopyNo + 4*subStackCopyNo;
-//  G4cout << "copyNo parts: " << layerNumber << " " << aStep->GetPostStepPoint()->GetTouchable()->GetVolume()->GetName() << " " << volCopyNo << " " << subStackCopyNo << G4endl;
-  } else {copyNo = volCopyNo;}
+
+
+  //output the results (you can check that this works if you're curious)
+  //G4cout << "Layer number, char: " << layerNumberChar << " int: " << layerNumber << G4endl;
+/* 
+  //get the detector to retrieve layer information
+  mqDetectorConstruction* detector = (mqDetectorConstruction*)G4RunManager::GetRunManager()
+					->GetUserDetectorConstruction();
+
+  //get number of bars per layer
+  G4int nBarPerLayer = detector->GetNBarPerLayer();
+*/
+  G4int nBarPerLayer = 6;
+  //this is the copy number, independent of layer
+  //this ID number is using my numbering convention, 0 is bottom left, 1 is middle left, 2 is upper left, 3 is bottom right, 4 is middle right, 5 is upper right. Add 0 for front layer, 6 for mid layer, 12 for back layer
+  G4int pmtNumber=0;
+  if(pmtCopyNumber<6) pmtNumber = nBarPerLayer*layerNumber+pmtCopyNumber;
+  else pmtNumber = pmtCopyNumber;
+  
+  //R878 PMTs: 0,2,5,6,7,8,9,11,12,14,16,17
+  //R7725 PMTs: 13,15
+  //ET9814B PMTs: 1,3,4,10
 
   G4double particleEnergy=aStep->GetTrack()->GetTotalEnergy();
   G4double particleWavelength=(1240/particleEnergy)*eV; //wavelength in nm
   //G4cout << "particle wavelength is: " << particleWavelength << G4endl;
   G4double detProb=0;
   G4bool det=false;
-
-
-// this is where we assign different QEs based on PMT. Just using ET universally for now
-/*  
+  
   if(pmtNumber==1|pmtNumber==3|pmtNumber==4|pmtNumber==10){
   	detProb = GetET9814B_QE().Value(particleWavelength);
 //	G4cout << "Hit ET9814B, detProb is: " << detProb << G4endl;
@@ -113,16 +116,14 @@ G4bool mqPMTSD::ProcessHits_constStep(const G4Step* aStep,
   	detProb = GetR878_QE().Value(particleWavelength);
 //	G4cout << "Hit R878, detProb is: " << detProb << G4endl;
   }	
-*/
 
-  	detProb = GetR878_QE().Value(particleWavelength);
-  	//if(copyNo==1000) detProb = GetR878_QE().Value(particleWavelength);
-	//else detProb = GetET9814B_QE().Value(particleWavelength);
-  
 	det=(G4UniformRand()<detProb);
   if(det){
 //	G4cout << "successfully detected in PMT: " << pmtNumber << G4endl;
-  //Get information from the optical photon which hit the pmt
+//Get information from the optical photon which hit the pmt
+
+  G4ThreeVector myEndDirection = aStep->GetPostStepPoint()->GetMomentumDirection();
+  G4double theta = acos(std::abs(myEndDirection.dot(G4ThreeVector(0,0,1))));
   G4double energyDeposit = aStep->GetTotalEnergyDeposit();
   G4double globalTime = aStep->GetPostStepPoint()->GetGlobalTime(); //time since the event was created
 
@@ -146,7 +147,8 @@ G4bool mqPMTSD::ProcessHits_constStep(const G4Step* aStep,
 	mqPMTHit*
 	hit = new mqPMTHit(); //so create new hit
 
-    hit->SetPMTNumber(copyNo);
+    hit->SetPMTNumber(pmtNumber);
+    hit->SetHitAngle(theta);
     //hit->SetPMTPhysVol(physVol);
     hit->SetParentID(pid);
     hit->SetTrackID(aStep->GetTrack()->GetTrackID());
@@ -172,9 +174,8 @@ G4bool mqPMTSD::ProcessHits_constStep(const G4Step* aStep,
 //G4cout << "Y-Position: " << hitPos.getY() << G4endl;
 //G4cout << "Z-Position: " << hitPos.getZ() << G4endl;
 /////////////////////////
-  // delete hit;
-  } //else {G4cout << "not detected" << G4endl;}
-return true;
+ } //else {G4cout << "not detected" << G4endl;}
+  return true;
 }
 
 //_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
@@ -199,7 +200,6 @@ void mqPMTSD::EndOfEvent(G4HCofThisEvent* ){
 
 //_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
 void mqPMTSD::clear(){
-delete pmtHitCollection;
 }
 
 //_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_

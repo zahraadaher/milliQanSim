@@ -273,8 +273,8 @@ void mqSteppingAction::UserSteppingAction(const G4Step * theStep){
 
         //if we don't think we're optimally coupled, this second 62 degrees term below is the glass-scintillator critical angle correction. Specifically, it's the correction for silicone oil-to-scintillator. The borosilicate glass-to-scintillator correction is 72.9 degrees. Enabling this cutoff for silicone oil for now since we're doing the optical coupling manually and it could possibly be a poor coupling, but it should mostly not matter for a bar since the detection angles are much sharper than 62 degrees most of the time
 //      if(true){
-//      if(G4UniformRand()<polyAngleFitResult && angleDetect<39.3){
-        if(G4UniformRand()<polyAngleFitResult){ //full range
+      if(G4UniformRand()<polyAngleFitResult && angleDetect<39.3){
+//        if(G4UniformRand()<polyAngleFitResult){ //full range
 
 //	G4cout << "hit registered!" << G4endl;
 	//G4cout << theStep->GetPostStepPoint()->GetPhysicalVolume()->GetName() << G4endl;
