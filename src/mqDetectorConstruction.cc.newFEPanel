@@ -2378,7 +2378,6 @@ void mqDetectorConstruction::SetMagField(G4double fieldValueX, G4double fieldVal
 }
 
 //Needed for sorting spectra
-/*
 void SortProperty(G4double* energies, G4double* values, int n) {
     std::vector<std::pair<G4double,G4double>> pairs;
     for(int i=0; i<n; i++) pairs.emplace_back(energies[i], values[i]);
@@ -2389,7 +2388,6 @@ void SortProperty(G4double* energies, G4double* values, int n) {
         values[i]   = pairs[i].second;
     }
 }
-*/
 
 
 G4MaterialPropertiesTable* mqDetectorConstruction::SetOpticalPropertiesOfPS(){
@@ -2427,7 +2425,7 @@ G4MaterialPropertiesTable* mptPlScin = new G4MaterialPropertiesTable();
 	ReadEJ200.close();
 	//std::reverse(photonEnergy, photonEnergy+nEntries); //Must reverse to put in ascending order. G4p11
 	//std::reverse(EJ200_SCINT, EJ200_SCINT + nEntries); //Must reverse to put in ascending order. G4p11
-	//SortProperty(photonEnergy, EJ200_SCINT, ScintEntry);
+	SortProperty(photonEnergy, EJ200_SCINT, ScintEntry);
 
 
 	for (int i = 0; i < nEntries; i++) {
@@ -2489,7 +2487,7 @@ G4MaterialPropertiesTable* mqDetectorConstruction::SetOpticalPropertiesOfPMT(){
 	ReadPMTQEff.close();
 	//std::reverse(photonEnergyPMT, photonEnergyPMT+nEntriesPMT); //Must reverse to put in ascending order. G4p11
 	//std::reverse(photocath_EFF, photocath_EFF + nEntriesPMT); //Must reverse to put in ascending order. G4p11
-	//SortProperty(photonEnergyPMT, photocath_EFF, nEntriesPMT);
+	SortProperty(photonEnergyPMT, photocath_EFF, nEntriesPMT);
 /*	
 	G4double PhCath_REFL[nEntriesPMT] = { // to be determined
 			0., 0.,0.,0.,0.,0.,0.,0.,0.,0.,

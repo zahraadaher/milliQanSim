@@ -35,6 +35,10 @@
 int main(int argc, char** argv) {
     boost::property_tree::ptree pt;
     boost::property_tree::ptree particlePTree;
+    G4UIExecutive *uiExec;
+    if (argc == 1 || argc <= 3) {
+    uiExec = new G4UIExecutive(argc, argv);
+    }
 
     // Default configuration file
     std::string configFile = "config/onepc.ini";
@@ -112,6 +116,7 @@ int main(int argc, char** argv) {
     UI->SetCoutDestination(LoggedSession);
 
     // Handle different execution modes based on arguments
+    /*
 if (argc == 1) {
     // Error: No arguments provided
     G4ExceptionDescription msg;
@@ -123,7 +128,21 @@ if (argc == 1) {
     G4cout << "MilliQan> Configuration file specified: " << argv[1] << G4endl;
     G4cout << "No macro file specified. Exiting." << G4endl;
     return 0;
-} else if (argc == 3) {
+    */
+if (argc == 1) {
+		G4cout << "MilliQan> Enter interactive mode." << G4endl;
+		// Define (G)UI terminal for interactive mode
+		// G4UIterminal is a (dumb) terminal
+		G4UIsession * session = 0;
+#ifdef G4UI_USE_TCSH
+		session = new G4UIterminal(new G4UItcsh);
+#else
+		session = new G4UIterminal();
+#endif
+		// 		UI->ApplyCommand("/control/execute run25.mac");
+		session->SessionStart();
+		delete session;
+} else if (argc <= 3) {
     // Configuration file and macro file provided
     G4cout << "MilliQan> Using configuration file: " << argv[1] << G4endl;
     G4cout << "MilliQan> Running macro file: " << argv[2] << G4endl;
@@ -136,8 +155,11 @@ if (argc == 1) {
     //LoggedSession->SessionStart();
     uiExec->SessionStart();
 
-    G4cout << "MilliQan> Simulation complete. Exiting." << G4endl;
+    //G4UIExecutive* uiExec = new G4UIExecutive(argc, argv);
+    uiExec->SessionStart();
     delete uiExec;
+
+    G4cout << "MilliQan> Simulation complete. Exiting." << G4endl;
     //return 0;
 } else {
     // Invalid number of arguments
