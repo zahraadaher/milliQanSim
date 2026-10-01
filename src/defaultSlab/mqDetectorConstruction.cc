@@ -881,7 +881,7 @@ for(int z=0;z<nslabsz;z++){
 	//place scintillator slabs between layers
 	new G4PVPlacement(
 			rotSlabPlace, //-15, -30 worked kinda
-			G4ThreeVector(ScintSlabOffsetX+pow(-1,(z+1)%2)*(ScintSlabWrapZ+0.5/2*2.54*cm)+i*(ScintSlabWrapZ*6+20*2.54*cm)-(frontLayerMid+ScintSlabOffsetZ0-ScintSlabWrapX+1*cm/2)*sin(worldRotation),centerOffsetY+(y-(double)(nslabsy-1)/2)*(2*ScintSlabWrapY+0.25*2.54*cm),(i*layerGap+(frontLayerMid+ScintSlabOffsetZ0)*cos(worldRotation)+(z-(double)(nslabsz-1)/2)*2*ScintSlabWrapX+((double)(nslabsz-1)/2-z)*4.5*2.54*cm)), //quarter inch spacing in y between slabs, 4.5in overlap. other measurements integrated also.
+			G4ThreeVector(ScintSlabOffsetX+pow(-1,z%2)*(ScintSlabWrapZ+0.5/2*2.54*cm)+i*(ScintSlabWrapZ*6+20*2.54*cm)-(frontLayerMid+ScintSlabOffsetZ0-ScintSlabWrapX+1*cm/2)*sin(worldRotation),centerOffsetY+(y-(double)(nslabsy-1)/2)*(2*ScintSlabWrapY+0.25*2.54*cm),(i*layerGap+(frontLayerMid+ScintSlabOffsetZ0)*cos(worldRotation)+(z-(double)(nslabsz-1)/2)*2*ScintSlabWrapX+((double)(nslabsz-1)/2-z)*4.5*2.54*cm)), //quarter inch spacing in y between slabs, 4.5in overlap. other measurements integrated also.
 			ScintSlabWrapLogic,
 			"ScintSlabPhys"+std::to_string(i)+std::to_string(z)+std::to_string(y),
 			logicWorld,
@@ -1233,7 +1233,7 @@ for(int z=0;z<nslabsz;z++){
 	new G4PVPlacement(
 			pmtRotSlab, //pmtRotSlabPlace
                         //G4ThreeVector(ScintSlabOffsetX+pow(-1,(z+1)%2)*(ScintSlabWrapZ+0.5/2*2.54*cm)-(ScintSlabPlaceZ-ScintSlabWrapX+1*cm/2)*sin(worldRotation),pmtOffsetY+centerOffsetY+(y-(double)(nslabsy-1)/2)*(2*ScintSlabWrapY+0.25*2.54*cm),(ScintSlabPlaceZ*cos(worldRotation)+(z-(double)(nslabsz-1)/2)*2*ScintSlabWrapX+((double)(nslabsz-1)/2-z)*1*cm)+pmtOffsetZ1),
-			G4ThreeVector(ScintSlabOffsetX+pow(-1,(z+1)%2)*(ScintSlabWrapZ+0.5/2*2.54*cm)+j*(ScintSlabWrapZ*6+20*2.54*cm)-(frontLayerMid+ScintSlabOffsetZ0-ScintSlabWrapX+1*cm/2)*sin(worldRotation),pmtOffsetY+centerOffsetY+(y-(double)(nslabsy-1)/2)*(2*ScintSlabWrapY+0.25*2.54*cm),(j*layerGap+(frontLayerMid+ScintSlabOffsetZ0)*cos(worldRotation)+(z-(double)(nslabsz-1)/2)*2*ScintSlabWrapX+((double)(nslabsz-1)/2-z)*4.5*2.54*cm)+pmtOffsetZ1), //quarter inch spacing in y between slabs, 4.5in overlap. other measurements integrated also.
+			G4ThreeVector(ScintSlabOffsetX+pow(-1,z%2)*(ScintSlabWrapZ+0.5/2*2.54*cm)+j*(ScintSlabWrapZ*6+20*2.54*cm)-(frontLayerMid+ScintSlabOffsetZ0-ScintSlabWrapX+1*cm/2)*sin(worldRotation),pmtOffsetY+centerOffsetY+(y-(double)(nslabsy-1)/2)*(2*ScintSlabWrapY+0.25*2.54*cm),(j*layerGap+(frontLayerMid+ScintSlabOffsetZ0)*cos(worldRotation)+(z-(double)(nslabsz-1)/2)*2*ScintSlabWrapX+((double)(nslabsz-1)/2-z)*4.5*2.54*cm)+pmtOffsetZ1), //quarter inch spacing in y between slabs, 4.5in overlap. other measurements integrated also.
 			phCathLog,
 		        "ScintSlabPMT"+std::to_string(j)+std::to_string(z)+std::to_string(y),
       		        logicWorld,
@@ -1243,7 +1243,7 @@ for(int z=0;z<nslabsz;z++){
 	                true);
 	new G4PVPlacement(
 			pmtRotSlab, //pmtRotSlabPlace
-			G4ThreeVector(ScintSlabOffsetX+pow(-1,(z+1)%2)*(ScintSlabWrapZ+0.5/2*2.54*cm)+j*(ScintSlabWrapZ*6+20*2.54*cm)-(frontLayerMid+ScintSlabOffsetZ0-ScintSlabWrapX+1*cm/2)*sin(worldRotation),pmtOffsetY+centerOffsetY+(y-(double)(nslabsy-1)/2)*(2*ScintSlabWrapY+0.25*2.54*cm),(j*layerGap+(frontLayerMid+ScintSlabOffsetZ0)*cos(worldRotation)+(z-(double)(nslabsz-1)/2)*2*ScintSlabWrapX+((double)(nslabsz-1)/2-z)*4.5*2.54*cm)+pmtOffsetZ1), //quarter inch spacing in y between slabs, 4.5in overlap. other measurements integrated also.
+			G4ThreeVector(ScintSlabOffsetX+pow(-1,z%2)*(ScintSlabWrapZ+0.5/2*2.54*cm)+j*(ScintSlabWrapZ*6+20*2.54*cm)-(frontLayerMid+ScintSlabOffsetZ0-ScintSlabWrapX+1*cm/2)*sin(worldRotation),pmtOffsetY+centerOffsetY+(y-(double)(nslabsy-1)/2)*(2*ScintSlabWrapY+0.25*2.54*cm),(j*layerGap+(frontLayerMid+ScintSlabOffsetZ0)*cos(worldRotation)+(z-(double)(nslabsz-1)/2)*2*ScintSlabWrapX+((double)(nslabsz-1)/2-z)*4.5*2.54*cm)+pmtOffsetZ1), //quarter inch spacing in y between slabs, 4.5in overlap. other measurements integrated also.
                         //G4ThreeVector(ScintSlabOffsetX+pow(-1,(z+1)%2)*(ScintSlabWrapZ+0.5/2*2.54*cm)-(ScintSlabPlaceZ-ScintSlabWrapX+1*cm/2)*sin(worldRotation),pmtOffsetY+centerOffsetY+(y-(double)(nslabsy-1)/2)*(2*ScintSlabWrapY+0.25*2.54*cm),(ScintSlabPlaceZ*cos(worldRotation)+(z-(double)(nslabsz-1)/2)*2*ScintSlabWrapX+((double)(nslabsz-1)/2-z)*1*cm)+pmtOffsetZ1),
 			pmtLog,
 		        "ScintSlabPMT"+std::to_string(j)+std::to_string(z)+std::to_string(y),
@@ -1255,7 +1255,7 @@ for(int z=0;z<nslabsz;z++){
 	
 	new G4PVPlacement(
 			pmtRotSlab, //pmtRotSlabPlace
-			G4ThreeVector(ScintSlabOffsetX+pow(-1,(z+1)%2)*(ScintSlabWrapZ+0.5/2*2.54*cm)+j*(ScintSlabWrapZ*6+20*2.54*cm)-(frontLayerMid+ScintSlabOffsetZ0-ScintSlabWrapX+1*cm/2)*sin(worldRotation),-pmtOffsetY+centerOffsetY+(y-(double)(nslabsy-1)/2)*(2*ScintSlabWrapY+0.25*2.54*cm),(j*layerGap+(frontLayerMid+ScintSlabOffsetZ0)*cos(worldRotation)+(z-(double)(nslabsz-1)/2)*2*ScintSlabWrapX+((double)(nslabsz-1)/2-z)*4.5*2.54*cm)+pmtOffsetZ1), //quarter inch spacing in y between slabs, 4.5in overlap. other measurements integrated also.
+			G4ThreeVector(ScintSlabOffsetX+pow(-1,z%2)*(ScintSlabWrapZ+0.5/2*2.54*cm)+j*(ScintSlabWrapZ*6+20*2.54*cm)-(frontLayerMid+ScintSlabOffsetZ0-ScintSlabWrapX+1*cm/2)*sin(worldRotation),-pmtOffsetY+centerOffsetY+(y-(double)(nslabsy-1)/2)*(2*ScintSlabWrapY+0.25*2.54*cm),(j*layerGap+(frontLayerMid+ScintSlabOffsetZ0)*cos(worldRotation)+(z-(double)(nslabsz-1)/2)*2*ScintSlabWrapX+((double)(nslabsz-1)/2-z)*4.5*2.54*cm)+pmtOffsetZ1), //quarter inch spacing in y between slabs, 4.5in overlap. other measurements integrated also.
                         //G4ThreeVector(ScintSlabOffsetX+pow(-1,(z+1)%2)*(ScintSlabWrapZ+0.5/2*2.54*cm)-(ScintSlabPlaceZ-ScintSlabWrapX+1*cm/2)*sin(worldRotation),-pmtOffsetY+centerOffsetY+(y-(double)(nslabsy-1)/2)*(2*ScintSlabWrapY+0.25*2.54*cm),(ScintSlabPlaceZ*cos(worldRotation)+(z-(double)(nslabsz-1)/2)*2*ScintSlabWrapX+((double)(nslabsz-1)/2-z)*1*cm)+pmtOffsetZ1),
 			phCathLog,
 		        "ScintSlabPMT"+std::to_string(j)+std::to_string(z)+std::to_string(y),
@@ -1266,7 +1266,7 @@ for(int z=0;z<nslabsz;z++){
 	                true);
 	new G4PVPlacement(
 			pmtRotSlab, //pmtRotSlabPlace
-			G4ThreeVector(ScintSlabOffsetX+pow(-1,(z+1)%2)*(ScintSlabWrapZ+0.5/2*2.54*cm)+j*(ScintSlabWrapZ*6+20*2.54*cm)-(frontLayerMid+ScintSlabOffsetZ0-ScintSlabWrapX+1*cm/2)*sin(worldRotation),-pmtOffsetY+centerOffsetY+(y-(double)(nslabsy-1)/2)*(2*ScintSlabWrapY+0.25*2.54*cm),(j*layerGap+(frontLayerMid+ScintSlabOffsetZ0)*cos(worldRotation)+(z-(double)(nslabsz-1)/2)*2*ScintSlabWrapX+((double)(nslabsz-1)/2-z)*4.5*2.54*cm)+pmtOffsetZ1), //quarter inch spacing in y between slabs, 4.5in overlap. other measurements integrated also.
+			G4ThreeVector(ScintSlabOffsetX+pow(-1,z%2)*(ScintSlabWrapZ+0.5/2*2.54*cm)+j*(ScintSlabWrapZ*6+20*2.54*cm)-(frontLayerMid+ScintSlabOffsetZ0-ScintSlabWrapX+1*cm/2)*sin(worldRotation),-pmtOffsetY+centerOffsetY+(y-(double)(nslabsy-1)/2)*(2*ScintSlabWrapY+0.25*2.54*cm),(j*layerGap+(frontLayerMid+ScintSlabOffsetZ0)*cos(worldRotation)+(z-(double)(nslabsz-1)/2)*2*ScintSlabWrapX+((double)(nslabsz-1)/2-z)*4.5*2.54*cm)+pmtOffsetZ1), //quarter inch spacing in y between slabs, 4.5in overlap. other measurements integrated also.
                         //G4ThreeVector(ScintSlabOffsetX+pow(-1,(z+1)%2)*(ScintSlabWrapZ+0.5/2*2.54*cm)-(ScintSlabPlaceZ-ScintSlabWrapX+1*cm/2)*sin(worldRotation),-pmtOffsetY+centerOffsetY+(y-(double)(nslabsy-1)/2)*(2*ScintSlabWrapY+0.25*2.54*cm),(ScintSlabPlaceZ*cos(worldRotation)+(z-(double)(nslabsz-1)/2)*2*ScintSlabWrapX+((double)(nslabsz-1)/2-z)*1*cm)+pmtOffsetZ1),
 			pmtLog,
 		        "ScintSlabPMT"+std::to_string(j)+std::to_string(z)+std::to_string(y),
@@ -1278,7 +1278,7 @@ for(int z=0;z<nslabsz;z++){
   
 	new G4PVPlacement(
 			pmtRotSlab2,
-			G4ThreeVector(ScintSlabOffsetX+pow(-1,(z+1)%2)*(ScintSlabWrapZ+0.5/2*2.54*cm)+j*(ScintSlabWrapZ*6+20*2.54*cm)-(frontLayerMid+ScintSlabOffsetZ0-ScintSlabWrapX+1*cm/2)*sin(worldRotation),-pmtOffsetY+centerOffsetY+(y-(double)(nslabsy-1)/2)*(2*ScintSlabWrapY+0.25*2.54*cm),(j*layerGap+(frontLayerMid+ScintSlabOffsetZ0)*cos(worldRotation)+(z-(double)(nslabsz-1)/2)*2*ScintSlabWrapX+((double)(nslabsz-1)/2-z)*4.5*2.54*cm)+pmtOffsetZ2), //quarter inch spacing in y between slabs, 4.5in overlap. other measurements integrated also.
+			G4ThreeVector(ScintSlabOffsetX+pow(-1,z%2)*(ScintSlabWrapZ+0.5/2*2.54*cm)+j*(ScintSlabWrapZ*6+20*2.54*cm)-(frontLayerMid+ScintSlabOffsetZ0-ScintSlabWrapX+1*cm/2)*sin(worldRotation),-pmtOffsetY+centerOffsetY+(y-(double)(nslabsy-1)/2)*(2*ScintSlabWrapY+0.25*2.54*cm),(j*layerGap+(frontLayerMid+ScintSlabOffsetZ0)*cos(worldRotation)+(z-(double)(nslabsz-1)/2)*2*ScintSlabWrapX+((double)(nslabsz-1)/2-z)*4.5*2.54*cm)+pmtOffsetZ2), //quarter inch spacing in y between slabs, 4.5in overlap. other measurements integrated also.
                         //G4ThreeVector(ScintSlabOffsetX+pow(-1,(z+1)%2)*(ScintSlabWrapZ+0.5/2*2.54*cm)-(ScintSlabPlaceZ-ScintSlabWrapX+1*cm/2)*sin(worldRotation),-pmtOffsetY+centerOffsetY+(y-(double)(nslabsy-1)/2)*(2*ScintSlabWrapY+0.25*2.54*cm),(ScintSlabPlaceZ*cos(worldRotation)+(z-(double)(nslabsz-1)/2)*2*ScintSlabWrapX+((double)(nslabsz-1)/2-z)*1*cm)+pmtOffsetZ2),
 			phCathLog,
 		        "ScintSlabPMT"+std::to_string(j)+std::to_string(z)+std::to_string(y),
@@ -1289,7 +1289,7 @@ for(int z=0;z<nslabsz;z++){
 	                true);
 	new G4PVPlacement(
 			pmtRotSlab2,
-			G4ThreeVector(ScintSlabOffsetX+pow(-1,(z+1)%2)*(ScintSlabWrapZ+0.5/2*2.54*cm)+j*(ScintSlabWrapZ*6+20*2.54*cm)-(frontLayerMid+ScintSlabOffsetZ0-ScintSlabWrapX+1*cm/2)*sin(worldRotation),-pmtOffsetY+centerOffsetY+(y-(double)(nslabsy-1)/2)*(2*ScintSlabWrapY+0.25*2.54*cm),(j*layerGap+(frontLayerMid+ScintSlabOffsetZ0)*cos(worldRotation)+(z-(double)(nslabsz-1)/2)*2*ScintSlabWrapX+((double)(nslabsz-1)/2-z)*4.5*2.54*cm)+pmtOffsetZ2), //quarter inch spacing in y between slabs, 4.5in overlap. other measurements integrated also.
+			G4ThreeVector(ScintSlabOffsetX+pow(-1,z%2)*(ScintSlabWrapZ+0.5/2*2.54*cm)+j*(ScintSlabWrapZ*6+20*2.54*cm)-(frontLayerMid+ScintSlabOffsetZ0-ScintSlabWrapX+1*cm/2)*sin(worldRotation),-pmtOffsetY+centerOffsetY+(y-(double)(nslabsy-1)/2)*(2*ScintSlabWrapY+0.25*2.54*cm),(j*layerGap+(frontLayerMid+ScintSlabOffsetZ0)*cos(worldRotation)+(z-(double)(nslabsz-1)/2)*2*ScintSlabWrapX+((double)(nslabsz-1)/2-z)*4.5*2.54*cm)+pmtOffsetZ2), //quarter inch spacing in y between slabs, 4.5in overlap. other measurements integrated also.
                         //G4ThreeVector(ScintSlabOffsetX+pow(-1,(z+1)%2)*(ScintSlabWrapZ+0.5/2*2.54*cm)-(ScintSlabPlaceZ-ScintSlabWrapX+1*cm/2)*sin(worldRotation),-pmtOffsetY+centerOffsetY+(y-(double)(nslabsy-1)/2)*(2*ScintSlabWrapY+0.25*2.54*cm),(ScintSlabPlaceZ*cos(worldRotation)+(z-(double)(nslabsz-1)/2)*2*ScintSlabWrapX+((double)(nslabsz-1)/2-z)*1*cm)+pmtOffsetZ2),
 			pmtLog,
 		        "ScintSlabPMT"+std::to_string(j)+std::to_string(z)+std::to_string(y),
@@ -1301,7 +1301,7 @@ for(int z=0;z<nslabsz;z++){
   
 	new G4PVPlacement(
 			pmtRotSlab2,
-			G4ThreeVector(ScintSlabOffsetX+pow(-1,(z+1)%2)*(ScintSlabWrapZ+0.5/2*2.54*cm)+j*(ScintSlabWrapZ*6+20*2.54*cm)-(frontLayerMid+ScintSlabOffsetZ0-ScintSlabWrapX+1*cm/2)*sin(worldRotation),pmtOffsetY+centerOffsetY+(y-(double)(nslabsy-1)/2)*(2*ScintSlabWrapY+0.25*2.54*cm),(j*layerGap+(frontLayerMid+ScintSlabOffsetZ0)*cos(worldRotation)+(z-(double)(nslabsz-1)/2)*2*ScintSlabWrapX+((double)(nslabsz-1)/2-z)*4.5*2.54*cm)+pmtOffsetZ2), //quarter inch spacing in y between slabs, 4.5in overlap. other measurements integrated also.
+			G4ThreeVector(ScintSlabOffsetX+pow(-1,z%2)*(ScintSlabWrapZ+0.5/2*2.54*cm)+j*(ScintSlabWrapZ*6+20*2.54*cm)-(frontLayerMid+ScintSlabOffsetZ0-ScintSlabWrapX+1*cm/2)*sin(worldRotation),pmtOffsetY+centerOffsetY+(y-(double)(nslabsy-1)/2)*(2*ScintSlabWrapY+0.25*2.54*cm),(j*layerGap+(frontLayerMid+ScintSlabOffsetZ0)*cos(worldRotation)+(z-(double)(nslabsz-1)/2)*2*ScintSlabWrapX+((double)(nslabsz-1)/2-z)*4.5*2.54*cm)+pmtOffsetZ2), //quarter inch spacing in y between slabs, 4.5in overlap. other measurements integrated also.
                         //G4ThreeVector(ScintSlabOffsetX+pow(-1,(z+1)%2)*(ScintSlabWrapZ+0.5/2*2.54*cm)-(ScintSlabPlaceZ-ScintSlabWrapX+1*cm/2)*sin(worldRotation),pmtOffsetY+centerOffsetY+(y-(double)(nslabsy-1)/2)*(2*ScintSlabWrapY+0.25*2.54*cm),(ScintSlabPlaceZ*cos(worldRotation)+(z-(double)(nslabsz-1)/2)*2*ScintSlabWrapX+((double)(nslabsz-1)/2-z)*1*cm)+pmtOffsetZ2),
 			phCathLog,
 		        "ScintSlabPMT"+std::to_string(j)+std::to_string(z)+std::to_string(y),
@@ -1312,7 +1312,7 @@ for(int z=0;z<nslabsz;z++){
 	                true);
 	new G4PVPlacement(
 			pmtRotSlab2,
-			G4ThreeVector(ScintSlabOffsetX+pow(-1,(z+1)%2)*(ScintSlabWrapZ+0.5/2*2.54*cm)+j*(ScintSlabWrapZ*6+20*2.54*cm)-(frontLayerMid+ScintSlabOffsetZ0-ScintSlabWrapX+1*cm/2)*sin(worldRotation),pmtOffsetY+centerOffsetY+(y-(double)(nslabsy-1)/2)*(2*ScintSlabWrapY+0.25*2.54*cm),(j*layerGap+(frontLayerMid+ScintSlabOffsetZ0)*cos(worldRotation)+(z-(double)(nslabsz-1)/2)*2*ScintSlabWrapX+((double)(nslabsz-1)/2-z)*4.5*2.54*cm)+pmtOffsetZ2), //quarter inch spacing in y between slabs, 4.5in overlap. other measurements integrated also.
+			G4ThreeVector(ScintSlabOffsetX+pow(-1,z%2)*(ScintSlabWrapZ+0.5/2*2.54*cm)+j*(ScintSlabWrapZ*6+20*2.54*cm)-(frontLayerMid+ScintSlabOffsetZ0-ScintSlabWrapX+1*cm/2)*sin(worldRotation),pmtOffsetY+centerOffsetY+(y-(double)(nslabsy-1)/2)*(2*ScintSlabWrapY+0.25*2.54*cm),(j*layerGap+(frontLayerMid+ScintSlabOffsetZ0)*cos(worldRotation)+(z-(double)(nslabsz-1)/2)*2*ScintSlabWrapX+((double)(nslabsz-1)/2-z)*4.5*2.54*cm)+pmtOffsetZ2), //quarter inch spacing in y between slabs, 4.5in overlap. other measurements integrated also.
                         //G4ThreeVector(ScintSlabOffsetX+pow(-1,(z+1)%2)*(ScintSlabWrapZ+0.5/2*2.54*cm)-(ScintSlabPlaceZ-ScintSlabWrapX+1*cm/2)*sin(worldRotation),pmtOffsetY+centerOffsetY+(y-(double)(nslabsy-1)/2)*(2*ScintSlabWrapY+0.25*2.54*cm),(ScintSlabPlaceZ*cos(worldRotation)+(z-(double)(nslabsz-1)/2)*2*ScintSlabWrapX+((double)(nslabsz-1)/2-z)*1*cm)+pmtOffsetZ2),
 			pmtLog,
 		        "ScintSlabPMT"+std::to_string(j)+std::to_string(z)+std::to_string(y),
