@@ -141,7 +141,7 @@ void MilliQPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent) {
     firstPass = false;
   }
 
-  G4double x0, y0, z0, xMo, yMo, zMo, En, MoNorm;// evtW;
+  G4double x0, y0, z0, xMo, yMo, zMo, En, MoNorm, evtW;
   if (fVertexDefined) {
     x0 = fXVertex;
     y0 = fYVertex;
@@ -207,8 +207,10 @@ void MilliQPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent) {
  
  mqUserEventInformation* eventInformation = (mqUserEventInformation*)anEvent->GetUserInformation();
  //eventInformation is null
- if (!eventInformation) {
-     eventInformation = new mqUserEventInformation();
+ if (!eventInformation){
+  eventInformation = new mqUserEventInformation();
+  anEvent->SetUserInformation(eventInformation);
+}
  eventInformation->SetEventWeight(evtW);
  
   neventLHE++;
