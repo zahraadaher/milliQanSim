@@ -67,7 +67,7 @@ G4bool MilliQPrimaryGeneratorAction::firstPass = true;
 std::vector<std::vector<G4double> >	MilliQPrimaryGeneratorAction::vertexList;
 std::vector<std::vector<G4double> >	MilliQPrimaryGeneratorAction::momentumList;
 std::vector<std::vector<G4double> >	MilliQPrimaryGeneratorAction::qmeList;
-//std::vector<G4double>                   MilliQPrimaryGeneratorAction::eventWeight;
+std::vector<G4double>                   MilliQPrimaryGeneratorAction::eventWeight;
 
 MilliQPrimaryGeneratorAction::MilliQPrimaryGeneratorAction(const boost::property_tree::ptree pt, G4int eventOffset) :
   G4VUserPrimaryGeneratorAction(), fParticleGun(0), fGunMessenger(0),
@@ -159,7 +159,7 @@ void MilliQPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent) {
     y0 = vertexList[neventLHE][1]*m;
     z0 = vertexList[neventLHE][2]*m;
     En = qmeList[neventLHE][2]*GeV;
-//    evtW = eventWeight[neventLHE]; //for 1 fb^-1
+    evtW = eventWeight[neventLHE]; //for 1 fb^-1
   }
 
 
@@ -205,8 +205,11 @@ void MilliQPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent) {
   fParticleGun->SetParticleDefinition(fgPrimaryParticle);
  //this gives errors, so for now just use the text file and read-in for root macros
  
- //mqUserEventInformation* eventInformation = (mqUserEventInformation*)anEvent->GetUserInformation();
- //eventInformation->SetEventWeight(evtW);
+ mqUserEventInformation* eventInformation = (mqUserEventInformation*)anEvent->GetUserInformation();
+ //eventInformation is null
+ if (!eventInformation) {
+     eventInformation = new mqUserEventInformation();
+ eventInformation->SetEventWeight(evtW);
  
   neventLHE++;
 }
@@ -291,8 +294,8 @@ void MilliQPrimaryGeneratorAction::GetLHEFourVectors() {
     iss.clear();
     iss.str(line);
 
-    if (!(iss >> fq >> fm >> fx >> fy >> fz >> fpx >> fpy >> fpz >> fw))
-//    if (!(iss >> evt >> pid >> fq >> fm >> fx >> fy >> fz >> fpx >> fpy >> fpz >> fw))
+//    if (!(iss >> fq >> fm >> fx >> fy >> fz >> fpx >> fpy >> fpz >> fw))
+    if (!(iss >> evt >> pid >> fq >> fm >> fx >> fy >> fz >> fpx >> fpy >> fpz >> fw))
       break;
   
 //pencil beam
@@ -305,7 +308,7 @@ void MilliQPrimaryGeneratorAction::GetLHEFourVectors() {
     MilliQPrimaryGeneratorAction::vertexList.push_back( Tver );
     momentumList.push_back( Tmo );
     qmeList.push_back( Tqme );
-    //eventWeight.push_back( fw );
+    eventWeight.push_back( fw );
 
    }
 
