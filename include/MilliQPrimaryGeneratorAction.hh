@@ -83,6 +83,7 @@ public:
   static std::vector<std::vector<G4double> >	vertexList;
   static std::vector<std::vector<G4double> > momentumList;
   static std::vector<std::vector<G4double> > qmeList;
+  static std::vector<G4double> eventWeight;
 
 
 private:
