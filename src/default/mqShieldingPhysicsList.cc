@@ -91,7 +91,10 @@
 #include "G4HadronPhysicsShielding.hh"
 
 #include "G4OpticalPhysics.hh"
+
+#if G4VERSION_NUMBER >= 1100
 #include "G4OpticalParameters.hh"  //New to G4p11
+#endif
 //#include "G4OpticalProcessIndex.hh"
 
 
@@ -197,22 +200,26 @@ mqShieldingList::mqShieldingList( G4int verbose, G4String LEN_model, const boost
   //optical physics added manually to shielding list, comment/uncomment to turn on/off photon tracks
 ///*
   G4OpticalPhysics* opticalPhysics = new G4OpticalPhysics();
+  
+  #if G4VERSION_NUMBER >= 1100
+  // Geant4 11.x
   auto opticalParams = G4OpticalParameters::Instance();
+  opticalParams->SetCerenkovTrackSecondariesFirst(false);
+  opticalParams->SetScintTrackSecondariesFirst(false);
 
-
-   //opticalPhysics->SetScintillationYieldFactor(1.0);  OLD 
+  #else
+   // Geant4 10.x
+   opticalPhysics->SetScintillationYieldFactor(1.0); 
    //opticalParams->SetScintillationYieldFactor(1.0);
    //opticalPhysics->SetScintillationExcitationRatio(0.0);
 
    //opticalPhysics->SetMaxNumPhotonsPerStep(300);
    //opticalPhysics->SetMaxBetaChangePerStep(10.0);
 
-   //opticalPhysics->SetTrackSecondariesFirst(kCerenkov,false); OLD
-   opticalParams->SetCerenkovTrackSecondariesFirst(false);
-   //opticalPhysics->SetTrackSecondariesFirst(kScintillation,false); OLD
-   opticalParams->SetScintTrackSecondariesFirst(false);
-
-
+   opticalPhysics->SetTrackSecondariesFirst(kCerenkov,false);
+   opticalPhysics->SetTrackSecondariesFirst(kScintillation,false);
+   
+   #endif
    this->RegisterPhysics( opticalPhysics );
 //*/
 

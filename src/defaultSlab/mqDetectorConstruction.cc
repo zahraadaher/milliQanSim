@@ -1780,7 +1780,10 @@ void SortProperty(G4double* energies, G4double* values, int n) {
     std::vector<std::pair<G4double,G4double>> pairs;
     for(int i=0; i<n; i++) pairs.emplace_back(energies[i], values[i]);
     std::sort(pairs.begin(), pairs.end(),
-              [](auto &a, auto &b){ return a.first < b.first; });
+          [](const std::pair<G4double,G4double> &a,
+             const std::pair<G4double,G4double> &b) {
+              return a.first < b.first;
+          });
     for(int i=0; i<n; i++) {
         energies[i] = pairs[i].first;
         values[i]   = pairs[i].second;
