@@ -1834,20 +1834,29 @@ G4MaterialPropertiesTable* mptPlScin = new G4MaterialPropertiesTable();
 		//EJ200_ABSL[i] *= myPSAttenuationLength;
 		EJ200_ABSL[i] = 3.8*m;//2.5 * m; // bulk attenuation at 425 nm
 	}
-
-	//mptPlScin->AddProperty("FASTCOMPONENT", photonEnergy, EJ200_SCINT,   //OLD, FASTCOMPONENT obsolete
-	//		ScintEntry);//->SetSpline(true);
+        
+        #if G4VERSION_NUMBER < 1100
+        // Geant4 10.x
+	mptPlScin->AddProperty("FASTCOMPONENT", photonEnergy, EJ200_SCINT,   //OLD, FASTCOMPONENT obsolete for 11.x
+			ScintEntry);//->SetSpline(true);
+        #else
+        // Geant4 11.x
 	mptPlScin->AddProperty("SCINTILLATIONCOMPONENT1", photonEnergy, EJ200_SCINT,
 			ScintEntry);//->SetSpline(true);
-
+         #endif
 
 	mptPlScin->AddProperty("ABSLENGTH", photonEnergy, EJ200_ABSL,
 				nEntries);//->SetSpline(true);
 
 	mptPlScin->AddConstProperty("SCINTILLATIONYIELD", 10000. / MeV); //--- according to EJ200
 	mptPlScin->AddConstProperty("RESOLUTIONSCALE", 1.0);
-	//mptPlScin->AddConstProperty("FASTTIMECONSTANT", 2.1 * ns); //decay time, according to EJ200  //FASTTIMECONSTANT obsolete
+        #if G4VERSION_NUMBER < 1100
+        // Geant4 10.x
+	mptPlScin->AddConstProperty("FASTTIMECONSTANT", 2.1 * ns); //decay time, according to EJ200  //FASTTIMECONSTANT obsolete for 11.x
+        #else
+        // Geant4 11.x
 	mptPlScin->AddConstProperty("SCINTILLATIONTIMECONSTANT1", 2.1 * ns); //decay time, according to EJ200
+        #endif
 	mptPlScin->AddProperty("RINDEX", photonEnergy, EJ200_RIND, nEntries);//->SetSpline(true);
 
 return mptPlScin;
